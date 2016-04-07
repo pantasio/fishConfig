@@ -25,3 +25,33 @@ set -g theme_nerd_fonts yes
 set -g theme_show_exit_status yes
 #set -g default_user your_normal_user
 set -g default_user pantasio
+
+#### Set $EDITOR=vim
+set -g -x $EDITOR vim
+
+# Reload config.fish
+function reloadfish 
+	. .config/fish/config.fish
+	clear
+	echo "the config.fish have been reload"
+	echo "Happy coding !!!"
+end
+
+# edit single line snippet
+function cfg-snippetrc 
+   vim ~/.snippetrc 
+end
+
+# edit multiline snippet
+function cfg-multisnippetrc
+	ls ~/.multisnippet | fzf -e -i | xclip -selection clipboard
+	set tmpvar (xclip -selection clipboard -o)
+	vim ~/.multisnippet/$tmpvar
+end
+
+#create new multiline snippet
+function multisnippet 
+	vim ~/.multisnippet/"$1"
+end
+#multisnippet() { $EDITOR ~/.multisnippet/"$1" ;}
+
